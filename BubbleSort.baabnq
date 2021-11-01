@@ -1,0 +1,95 @@
+jump skip;
+
+
+"label for initializing the list
+lab initList;
+  "define the size of the list
+  put _listSize = 10;
+  
+  "create a new list with the pointer _pointer and the size _size
+  new _listSize _pointer;
+
+  "reset the index
+  put _index = 0;
+
+
+"loop of the label initList
+lab initList::loop;
+  "fill the current index with the number _size - _index
+  put _listSize - _index -> _pointer + _index;
+  put _index = _index + 1;
+
+  "loop if the index is smaller than the size
+  jump initList::loop ~ _index < _listSize;
+  return;
+
+
+"label for printing the list
+lab printList;
+  "reset the index
+  put _index = 0;
+
+
+"loop for printing the list
+lab printList::loop;
+  "read the value from the index _index in the list
+  put _value <- _pointer + _index;
+  print _value;
+
+  put _index = _index + 1;
+  
+  "loop if the index is smaller than the size of the list
+  jump printList::loop ~ _index < _listSize;
+
+  return;
+
+
+"label for sorting
+lab sort;
+  put _j = 0;
+
+
+"loop j for sorting
+lab sort::loopJ;
+  put _i = 0;
+
+
+"loop i for sorting
+lab sort::loopI;
+  "read a and b from the pointer + i (+ 1)
+  put _aVal <- _pointer + _i + 0;
+  put _bVal <- _pointer + _i + 1;
+
+  "if a is smaller than b, you dont have to swap
+  jump sort::skipSwap ~ _aVal < _bVal;
+
+  "swapping a and b
+  put _bVal -> _pointer + _i + 0;
+  put _aVal -> _pointer + _i + 1;
+
+  lab sort::skipSwap;
+
+  put _i = _i + 1;
+  
+  "jump to loopI if i is smaller than the size
+  jump sort::loopI ~ _i < _listSize;
+
+  put _j = _j + 1;
+  
+  "jump to loopJ if j is smaller than the size
+  jump sort::loopJ ~ _j < _listSize;
+
+  return;
+
+
+lab skip;
+  sub initList;
+  sub printList;
+  sub sort;
+
+  putstr 10;
+
+  "increment the pointer (idk why)
+  put _pointer = _pointer + 1;
+
+  sub printList;
