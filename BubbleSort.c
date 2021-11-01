@@ -11,7 +11,12 @@ void printList(int*);
 
 int main()
 {
-    int list[listSize] = {10, 16, 8, 12, 15, 6, 3, 9, 5, 99};
+    int list[listSize];
+    for(int i = 0; i < listSize; i++)
+    {
+        list[i] = listSize - i;
+    }
+
     printList(list);
 
     for(int j = 0; j < listSize; j++)
